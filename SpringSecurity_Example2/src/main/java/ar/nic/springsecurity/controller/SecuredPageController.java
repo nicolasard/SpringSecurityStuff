@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SecuredPageController {
 
-    @GetMapping("/securedPage")
+    @GetMapping("/")
     public String securedPage() {
         return "SecuredPage";
     }

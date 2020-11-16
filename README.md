@@ -11,7 +11,9 @@ In this example we have the unsecure page /health and we are applying security
 rules to every other page.
 
 #### Example 2 
-This example uses a DB to store the user and passwords.
+This example uses a DB to store the user and passwords. (This example is taken from
+https://www.baeldung.com/spring-security-jdbc-authentication).
+It uses a H2 database. 
 
 
 #### Compiling
