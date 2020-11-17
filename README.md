@@ -1,5 +1,7 @@
 ### Spring Security  examples
 
+![Java CI with Maven](https://github.com/nicolasard/SpringSecurityStuff/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 #### Example 1 
 This is the very basic Spring Batch security that allows you to secure 
 a page.
