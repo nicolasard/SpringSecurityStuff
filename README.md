@@ -17,6 +17,8 @@ This example uses a DB to store the user and passwords. (This example is taken f
 https://www.baeldung.com/spring-security-jdbc-authentication).
 It uses a H2 database. 
 
+This example also contains a DockerFile that allows you to create a docker image and a 
+Helm chart that allows you to deploy in kubernetes the image.
 
 #### Compiling
 To compile all the project at once you have the root pom.xml
