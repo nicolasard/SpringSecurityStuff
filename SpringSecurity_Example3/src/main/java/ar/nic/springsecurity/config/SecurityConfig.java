@@ -1,5 +1,6 @@
 package ar.nic.springsecurity.config;
 
+import ar.nic.springsecurity.entity.User;
 import ar.nic.springsecurity.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,10 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/health","/create-user","/h2-console/**").permitAll()
+                .antMatchers( "/health","/sign-in/**","/sign-up/**","/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .loginPage("/sign-in")
                 .permitAll()
                 .and()
                 .logout()
@@ -53,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
-    @Bean
+
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
