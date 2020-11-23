@@ -22,3 +22,7 @@ Helm chart that allows you to deploy in kubernetes the image.
 
 #### Compiling
 To compile all the project at once you have the root pom.xml
+
+#### Example 3 
+This is an example that extends the service and allows you to register a new user.
+This is example was taken from https://github.com/kamer/spring-boot-user-registration. 
