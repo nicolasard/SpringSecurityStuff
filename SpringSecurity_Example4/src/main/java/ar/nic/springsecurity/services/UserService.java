@@ -40,7 +40,6 @@ public class UserService implements UserDetailsService {
     public void signUpUser(User user) {
         final String encryptedPassword = passwordEncoder().encode(user.getPassword());
         user.setPassword(encryptedPassword);
-        user.setEnabled(true);
         final User createdUser = userRepository.save(user);
         final ConfirmationToken confirmationToken = new ConfirmationToken(user);
         confirmationTokenService.saveConfirmationToken(confirmationToken);
@@ -62,5 +61,17 @@ public class UserService implements UserDetailsService {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    public void confirmUser(ConfirmationToken confirmationToken) {
+
+        final User user = confirmationToken.getUser();
+
+        user.setEnabled(true);
+
+        userRepository.save(user);
+
+        confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+
     }
 }

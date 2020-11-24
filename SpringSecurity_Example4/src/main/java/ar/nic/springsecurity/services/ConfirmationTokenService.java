@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-class ConfirmationTokenService {
+public class ConfirmationTokenService {
 
     private ConfirmationTokenRepository confirmationTokenRepository;
 
@@ -22,7 +22,7 @@ class ConfirmationTokenService {
         confirmationTokenRepository.deleteById(id);
     }
 
-    Optional<ConfirmationToken> findConfirmationTokenByToken(String token) {
+    public Optional<ConfirmationToken> findConfirmationTokenByToken(String token) {
 
         return confirmationTokenRepository.findConfirmationTokenByConfirmationToken(token);
     }

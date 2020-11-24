@@ -25,7 +25,7 @@ public class ConfirmationToken {
     private User user;
 
     public ConfirmationToken(User user){
-        this.user = user;
+        this.setUser(user);
         this.createdDate = LocalDate.now();
         this.setConfirmationToken(UUID.randomUUID().toString());
     }
@@ -36,5 +36,21 @@ public class ConfirmationToken {
 
     public void setConfirmationToken(String confirmationToken) {
         this.confirmationToken = confirmationToken;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
