@@ -28,6 +28,11 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+        - name: telegraf
+          image: "telegraf:1.12.3"
+          env:
+            - name: INFLUX_DB_HOST
+              value: monitor.int.egallo.com.ar 
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
