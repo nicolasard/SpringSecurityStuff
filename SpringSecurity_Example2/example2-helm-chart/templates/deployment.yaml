@@ -27,12 +27,18 @@ spec:
       serviceAccountName: {{ include "example2-helm-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: logs-data
+          emptyDir: {}
       containers:
         - name: telegraf
           image: "telegraf:1.12.3"
           env:
             - name: INFLUX_DB_HOST
               value: monitor.int.egallo.com.ar 
+          volumeMounts:
+            - name: logs-data
+              mountPath: /logs-data
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -44,6 +50,9 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: logs-data
+              mountPath: /logs-data
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
