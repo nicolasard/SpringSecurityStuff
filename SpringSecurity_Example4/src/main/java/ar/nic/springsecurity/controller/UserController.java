@@ -24,14 +24,17 @@ public class UserController {
 
     @GetMapping("/sign-in")
     String signIn() {
-
         return "sign-in2";
     }
 
     @GetMapping("/sign-up")
     String signUpPage(User user) {
-
         return "sign-up2";
+    }
+
+    @GetMapping("/confirmacion")
+    String confirmation() {
+        return "confirmation";
     }
 
     @PostMapping("/sign-up")
@@ -42,7 +45,7 @@ public class UserController {
         }
         userService.signUpUser(user);
 
-        return "redirect:/sign-in2";
+        return "redirect:/con";
     }
 
     @GetMapping("/sign-up/confirm")

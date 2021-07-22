@@ -57,7 +57,7 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull
-    @Size(min=5, max=30)
+    @Size(min=5, max=100)
     private String password;
 
     @Builder.Default

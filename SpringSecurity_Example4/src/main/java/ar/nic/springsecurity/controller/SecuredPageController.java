@@ -18,4 +18,8 @@ public class SecuredPageController {
         return authentication.toString();
     }
 
+    @GetMapping("/con2")
+    String confirmation() {
+        return "confirmation";
+    }
 }
