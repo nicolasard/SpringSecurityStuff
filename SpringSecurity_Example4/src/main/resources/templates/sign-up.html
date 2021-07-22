@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Sign up</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div class="px-4 py-5 my-5 text-center">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="display-5 fw-bold">Complete the following form to register</h1>
+        <form role="form" th:action="@{/sign-up}" th:method="post" th:object="${user}">
+            <!--Name-->
+            <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="inputPassword6" class="col-form-label">Name</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="name" class="form-control" th:classappend="${#fields.hasErrors('name')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{name}">
+                    <div id="validationNameFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <span id="nameHelpInline" class="form-text">
+                    </span>
+                </div>
+            </div>
+            <!--SurName-->
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <label for="inputPassword6" class="col-form-label">Surname</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="surname" name="surname" class="form-control" th:classappend="${#fields.hasErrors('surname')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{surname}">
+                    <div id="validationSurnameFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <span id="surnameHelpInline" class="form-text">
+                    </span>
+                </div>
+            </div>
+            <!--email-->
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <label for="inputPassword6" class="col-form-label">Email</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="email" name="email" class="form-control" th:classappend="${#fields.hasErrors('email')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{email}">
+                    <div id="validationEmailFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <span id="nameHelpInline" class="form-text">
+                      We are going to validate your email.
+                    </span>
+                </div>
+            </div>
+            <!--password-->
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <label for="inputPassword6" class="col-form-label">Password</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="password" id="password" name="password" class="form-control" th:classappend="${#fields.hasErrors('password')} ? is-invalid"  aria-describedby="passwordHelpInline" th:field="*{password}">
+                    <div id="validationPasswordFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                    </div>
+                </div>
+                <div class="col-auto">
+                </div>
+            </div>
+            <input  class="btn btn-primary" type="submit">
+        </form>
+    </div>
+    <div th:replace="footer :: footer"></div>
+</div>
+</body>
+</html>

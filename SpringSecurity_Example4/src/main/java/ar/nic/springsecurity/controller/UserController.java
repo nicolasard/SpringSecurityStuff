@@ -24,37 +24,32 @@ public class UserController {
 
     @GetMapping("/sign-in")
     String signIn() {
-        return "sign-in2";
+        return "sign-in";
     }
 
     @GetMapping("/sign-up")
     String signUpPage(User user) {
-        return "sign-up2";
+        return "sign-up";
     }
 
-    @GetMapping("/confirmacion")
+    @GetMapping("/confirmation")
     String confirmation() {
         return "confirmation";
     }
 
     @PostMapping("/sign-up")
     String signUp(@Valid User user, BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
-            return "sign-up2";
+            return "sign-up";
         }
         userService.signUpUser(user);
-
-        return "redirect:/con";
+        return "redirect:/confirmation";
     }
 
     @GetMapping("/sign-up/confirm")
     String confirmMail(@RequestParam("token") String token) {
-
         Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
-
         optionalConfirmationToken.ifPresent(userService::confirmUser);
-
         return "redirect:/sign-in";
     }
 }
