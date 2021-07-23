@@ -15,6 +15,7 @@
         <module>SpringSecurity_Example2</module>
 		<module>SpringSecurity_Example3</module>
         <module>SpringSecurity_Example4</module>
+        <module>SpringSecurity_Example5</module>
     </modules>
 
 </project>
