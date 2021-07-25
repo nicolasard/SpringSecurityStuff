@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Sign up</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div class="px-4 py-5 my-5 text-center">
+  <div class="col-lg-6 mx-auto">
+    <h1 class="display-5 fw-bold">Credit card checkout</h1>
+    <div>You are paying <span th:text="${payment.chargetotal}"></span><span th:text="${payment.currency}"> </span> / Payment ID: <span th:text="${payment.oid}"> </span></div>
+    <div> Credit Card: xxxx</div>
+    <div> Click confirm to proceed with the payment</div>
+    <form th:action="@{https://test.ipg-online.com/connect/}" th:method="post" th:object="${payment}">
+      <input type="hidden" id="oid" name="oid" th:field="*{oid}">
+      <input type="hidden" id="chargetotal" name="chargetotal" th:field="*{chargetotal}">
+      <input type="hidden" id="currency" name="currency" th:field="*{currency}">
+      <input type="hidden" id="txntpe" name="txntpe" th:field="*{txntpe}">
+      <input type="hidden" id="storename" name="storename" th:field="*{storename}">
+      <input type="hidden" id="timezone" name="timezone" th:field="*{timezone}">
+      <input type="hidden" id="txdatetime" name="txdatetime" th:field="*{txdatetime}">
+      <input type="hidden" id="hashExtended" name="hashExtended" th:field="*{hashExtended}">
+      <input type="hidden" id="hash_algorithm" name="hash_algorithm" th:field="*{hash_algorithm}">
+      <input  class="btn btn-primary" type="submit" value="Confirm">
+    </form>
+  </div>
+</div>
+</body>
+</html>

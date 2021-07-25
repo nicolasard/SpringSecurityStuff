@@ -12,13 +12,14 @@
 <div class="px-4 py-5 my-5 text-center">
     <div class="col-lg-6 mx-auto">
         <h1 class="display-5 fw-bold">Credit card checkout</h1>
+        <div>You are paying <span th:text="${payment.chargetotal}"></span><span th:text="${payment.currency}"> </span> / Payment ID: <span th:text="${payment.oid}"> </span></div>
         <form th:action="@{./card-payment}" th:method="post" th:object="${payment}">
             <div class="row g-3 align-items-center mb-3 ">
                 <div class="col-auto">
                     <label for="inputPassword6" class="col-form-label">Name in the card</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline" th:field="*{currency}">
+                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline" th:field="*{txntpe}">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3 ">
@@ -29,6 +30,10 @@
                     <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline">
                 </div>
             </div>
+            <input type="hidden" id="oid" name="oid" th:field="*{oid}">
+            <input type="hidden" id="chargetotal" name="chargetotal" th:field="*{chargetotal}">
+            <input type="hidden" id="currency" name="currency" th:field="*{currency}">
+            <input type="hidden" id="txntpe" name="txntpe" th:field="*{txntpe}">
             <input  class="btn btn-primary" type="submit" value="Pay">
         </form>
     </div>
