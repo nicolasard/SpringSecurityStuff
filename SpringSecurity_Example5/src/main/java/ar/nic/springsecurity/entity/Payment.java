@@ -30,7 +30,7 @@ public class Payment {
 
     private String transactionNotificationURL;
 
-    private String txdatetime;
+    private String txndatetime;
 
     private String txntpe;
 
@@ -118,12 +118,12 @@ public class Payment {
         this.transactionNotificationURL = transactionNotificationURL;
     }
 
-    public String getTxdatetime() {
-        return txdatetime;
+    public String getTxndatetime() {
+        return txndatetime;
     }
 
-    public void setTxdatetime(String txdatetime) {
-        this.txdatetime = txdatetime;
+    public void setTxndatetime(String txndatetime) {
+        this.txndatetime = txndatetime;
     }
 
     public String getTxntpe() {
@@ -139,7 +139,7 @@ public class Payment {
         for (Field f : getClass().getDeclaredFields()) {
             Object field = f.get(this);
             if (field != null) {
-                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret")) {
+                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret")&& !f.getName().equals("hash_algorithm")) {
                     dictionary.put(f.getName(), f.get(this).toString());
                 }
             }

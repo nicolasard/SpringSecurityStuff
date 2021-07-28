@@ -40,7 +40,7 @@ public class ShopController {
         payment.setOid(uuid.toString());
         payment.setCurrency("EUR");
         payment.setTimezone(TimeZone.getDefault().getID());
-        payment.setTxdatetime(df.format(new Date()));
+        payment.setTxndatetime(df.format(new Date()));
         payment.setStorename("120995000");
         payment.setHashExtended(payment.getHash("sharedsecret"));
         payment.setHash_algorithm("HMACSHA256");
