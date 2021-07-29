@@ -12,8 +12,8 @@
 <div class="px-4 py-5 my-5 text-center">
     <div class="col-lg-6 mx-auto">
         <h1 class="display-5 fw-bold">Credit card checkout</h1>
-        <div>You are paying <span th:text="${payment.chargetotal}"></span><span th:text="${payment.currency}"> </span> / Payment ID: <span th:text="${payment.oid}"> </span></div>
-        <form th:action="@{./card-payment}" th:method="post" th:object="${payment}">
+        <div>You are paying <span th:text="${bill.description}"></span> </div>
+        <form th:action="@{/shop/card-payment/__${bill.id}__}" th:method="post" th:object="${payment}">
             <div class="row g-3 align-items-center mb-3 ">
                 <div class="col-auto">
                     <label for="inputPassword6" class="col-form-label">Name in the card</label>
