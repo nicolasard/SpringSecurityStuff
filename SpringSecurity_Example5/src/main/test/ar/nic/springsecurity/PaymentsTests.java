@@ -19,7 +19,7 @@ public class PaymentsTests {
         payment.setTimezone("Europe/Berlin");
         payment.setTransactionNotificationURL("https://localhost:8643/webshop/transactionNotification");
         payment.setTxndatetime("2020:04:17-17:32:41");
-        payment.setTxntpe("sale");
+        payment.setTxntype("sale");
         payment.setHash_algorithm("HMACSHA256");
 
         String expectedResult = "13.00|978|M|https://localhost:8643/webshop/response_failure.jsp|https://localhost:8643/webshop/response_success.jsp|10123456789|Europe/Berlin|https://localhost:8643/webshop/transactionNotification|2020:04:17-17:32:41|sale";

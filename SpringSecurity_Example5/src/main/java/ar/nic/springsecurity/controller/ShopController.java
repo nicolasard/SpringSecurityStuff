@@ -53,19 +53,19 @@ public class ShopController {
     }
 
     @PostMapping("card-payment/{id}")
-    String cardPaymentPost(Payment payment, @PathVariable Long id) {
+    String cardPaymentPost(Payment payment, @PathVariable Long id) throws IllegalAccessException {
         Bill bill = billingService.getById(id).get();
         UUID uuid = UUID.randomUUID();
         DateFormat df = new SimpleDateFormat("yyyy:MM:dd-kk:mm:ss");
         payment.setChargetotal(bill.getTotal());
-        payment.setTxntpe("sale");
+        payment.setTxntype("sale");
         payment.setOid(uuid.toString());
         payment.setCurrency("EUR");
         payment.setTimezone(TimeZone.getDefault().getID());
         payment.setTxndatetime(df.format(new Date()));
         payment.setStorename("120995000");
-        payment.setHashExtended(payment.getHash("sharedsecret"));
         payment.setHash_algorithm("HMACSHA256");
+        payment.setHashExtended(payment.getHash("sharedsecret"));
         return "card-payment-confirm";
     }
 }

@@ -19,7 +19,7 @@
                     <label for="inputPassword6" class="col-form-label">Name in the card</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline" th:field="*{txntpe}">
+                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline" th:field="*{txntype}">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3 ">
@@ -33,7 +33,7 @@
             <input type="hidden" id="oid" name="oid" th:field="*{oid}">
             <input type="hidden" id="chargetotal" name="chargetotal" th:field="*{chargetotal}">
             <input type="hidden" id="currency" name="currency" th:field="*{currency}">
-            <input type="hidden" id="txntpe" name="txntpe" th:field="*{txntpe}">
+            <input type="hidden" id="txntpe" name="txntpe" th:field="*{txntype}">
             <input  class="btn btn-primary" type="submit" value="Pay">
         </form>
     </div>

@@ -32,7 +32,7 @@ public class Payment {
 
     private String txndatetime;
 
-    private String txntpe;
+    private String txntype;
 
     private String hashExtended;
 
@@ -126,12 +126,12 @@ public class Payment {
         this.txndatetime = txndatetime;
     }
 
-    public String getTxntpe() {
-        return txntpe;
+    public String getTxntype() {
+        return txntype;
     }
 
-    public void setTxntpe(String txntpe) {
-        this.txntpe = txntpe;
+    public void setTxntype(String txntype) {
+        this.txntype = txntype;
     }
 
     public String getExtendedConcat() throws IllegalAccessException {
@@ -139,7 +139,7 @@ public class Payment {
         for (Field f : getClass().getDeclaredFields()) {
             Object field = f.get(this);
             if (field != null) {
-                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret")&& !f.getName().equals("hash_algorithm")) {
+                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret")) {
                     dictionary.put(f.getName(), f.get(this).toString());
                 }
             }
@@ -156,6 +156,7 @@ public class Payment {
 
     public String getHash(String sharedScret) {
         try {
+            System.out.println(this.getExtendedConcat());
             return calculateHMAC(this.getExtendedConcat(),sharedScret);
         } catch (SignatureException e) {
             e.printStackTrace();
