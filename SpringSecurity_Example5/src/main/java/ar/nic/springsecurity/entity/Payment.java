@@ -38,6 +38,14 @@ public class Payment {
 
     private String hash_algorithm;
 
+    private String cardnumber;
+
+    private String expmonth;
+
+    private String expyear;
+
+    private String cvm;
+
     public String getOid() {
         return oid;
     }
@@ -139,7 +147,7 @@ public class Payment {
         for (Field f : getClass().getDeclaredFields()) {
             Object field = f.get(this);
             if (field != null) {
-                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret")) {
+                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret") && !f.getName().equals("cardnumber") && !f.getName().equals("cvm") && !f.getName().equals("expyear") && !f.getName().equals("expmonth") ){
                     dictionary.put(f.getName(), f.get(this).toString());
                 }
             }
@@ -202,5 +210,37 @@ public class Payment {
 
     public void setHash_algorithm(String hash_algorithm) {
         this.hash_algorithm = hash_algorithm;
+    }
+
+    public String getCardnumber() {
+        return cardnumber;
+    }
+
+    public void setCardnumber(String cardnumber) {
+        this.cardnumber = cardnumber;
+    }
+
+    public String getExpmonth() {
+        return expmonth;
+    }
+
+    public void setExpmonth(String expmonth) {
+        this.expmonth = expmonth;
+    }
+
+    public String getExpyear() {
+        return expyear;
+    }
+
+    public void setExpyear(String expyear) {
+        this.expyear = expyear;
+    }
+
+    public String getCvm() {
+        return cvm;
+    }
+
+    public void setCvm(String cvm) {
+        this.cvm = cvm;
     }
 }

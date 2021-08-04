@@ -24,10 +24,34 @@
             </div>
             <div class="row g-3 align-items-center mb-3 ">
                 <div class="col-auto">
-                    <label for="inputPassword6" class="col-form-label">Card Number</label>
+                    <label for="cardnumber" class="col-form-label">Card Number</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline">
+                    <input type="text" id="cardnumber" name="cardnumber" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{cardnumber}">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="expmonth" class="col-form-label">Exp. Month</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="expmonth" name="expmonth" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{expmonth}">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="expyear" class="col-form-label">Exp. Year</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="expyear" name="expyear" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{expyear}">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="cvm" class="col-form-label">CVV/CVV2</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="cvm" name="cvm" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{cvm}">
                 </div>
             </div>
             <input type="hidden" id="oid" name="oid" th:field="*{oid}">

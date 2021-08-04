@@ -2,13 +2,12 @@ package ar.nic.springsecurity.controller;
 
 import ar.nic.springsecurity.entity.Bill;
 import ar.nic.springsecurity.entity.Payment;
+import ar.nic.springsecurity.entity.PaymentPostback;
 import ar.nic.springsecurity.services.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
@@ -53,7 +52,7 @@ public class ShopController {
     }
 
     @PostMapping("card-payment/{id}")
-    String cardPaymentPost(Payment payment, @PathVariable Long id) throws IllegalAccessException {
+    String cardPaymentPost(Payment payment, @PathVariable Long id,@RequestHeader String host) throws IllegalAccessException {
         Bill bill = billingService.getById(id).get();
         UUID uuid = UUID.randomUUID();
         DateFormat df = new SimpleDateFormat("yyyy:MM:dd-kk:mm:ss");
@@ -65,7 +64,17 @@ public class ShopController {
         payment.setTxndatetime(df.format(new Date()));
         payment.setStorename("120995000");
         payment.setHash_algorithm("HMACSHA256");
+        payment.setResponseSuccessURL("http://"+host+"/shop/card-payment/postback");
+        payment.setResponseFailURL("http://"+host+"/shop/card-payment/postback");
         payment.setHashExtended(payment.getHash("sharedsecret"));
         return "card-payment-confirm";
+    }
+
+    @PostMapping(
+            path = "/card-payment/postback",
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    String cardPaymentPostback(@RequestBody PaymentPostback paymentPostback)  {
+
+        return "card-payment-postback";
     }
 }
