@@ -11,8 +11,19 @@
 <div th:replace="header :: header"></div>
 <div class="px-4 py-5 my-5 text-center">
     <div class="col-lg-6 mx-auto">
-        <h1 class="display-5 fw-bold">Payment Accepted</h1>
-        <input  class="btn btn-primary" type="submit" value="Back to my bills">
+        <div th:if="${condition}">
+            <p>TRUE</p>
+        </div>
+        <div th:switch="${paymentPostBack.status}">
+            <div th:case="GENEHMIGT">
+                <h1 class="display-5 fw-bold">Payment Accepted</h1>
+                <input  class="btn btn-primary" type="submit" value="Back to my bills">
+            </div>
+            <div th:case="*">
+                <h1 class="display-5 fw-bold">Payment Declined</h1>
+                <input  class="btn btn-primary" type="submit" value="Back to my bills">
+            </div>
+        </div>
     </div>
 </div>
 </body>

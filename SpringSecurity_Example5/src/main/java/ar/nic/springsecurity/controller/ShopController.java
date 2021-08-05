@@ -5,11 +5,19 @@ import ar.nic.springsecurity.entity.Payment;
 import ar.nic.springsecurity.entity.PaymentPostback;
 import ar.nic.springsecurity.services.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -70,11 +78,11 @@ public class ShopController {
         return "card-payment-confirm";
     }
 
-    @PostMapping(
-            path = "/card-payment/postback",
-            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    String cardPaymentPostback(@RequestBody PaymentPostback paymentPostback)  {
-
+    @PostMapping(path = "/card-payment/postback")
+    String cardPaymentPostback(Model model, @RequestParam MultiValueMap<String,String> paramMap)  {
+        PaymentPostback paymentPostback = new PaymentPostback();
+        paymentPostback.setStatus(paramMap.getFirst("status"));
+        model.addAttribute("paymentPostBack",paymentPostback);
         return "card-payment-postback";
     }
 }
