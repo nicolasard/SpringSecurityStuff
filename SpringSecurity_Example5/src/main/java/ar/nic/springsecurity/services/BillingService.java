@@ -2,6 +2,8 @@ package ar.nic.springsecurity.services;
 
 import ar.nic.springsecurity.entity.Bill;
 import lombok.AllArgsConstructor;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,17 +12,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BillingService {
 
-    private BillingRepository BillingRepository;
+    private BillingRepository billingRepository;
 
     public void save(Bill bill) {
-        BillingRepository.save(bill);
+        Logger logger = LoggerFactory.getLogger(BillingService.class);
+        billingRepository.save(bill);
+        logger.info("Bill Saved",bill.toString());
     }
 
     public Iterable<Bill> list() {
-        return BillingRepository.findAll();
+        return billingRepository.findAll();
     }
 
     public Optional<Bill> getById(Long id){
-        return BillingRepository.findById(id);
+        return billingRepository.findById(id);
     }
 }

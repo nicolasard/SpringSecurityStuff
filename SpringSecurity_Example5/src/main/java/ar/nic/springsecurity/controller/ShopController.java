@@ -5,19 +5,12 @@ import ar.nic.springsecurity.entity.Payment;
 import ar.nic.springsecurity.entity.PaymentPostback;
 import ar.nic.springsecurity.services.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpInputMessage;
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -40,7 +33,7 @@ public class ShopController {
         Iterable<Bill> bills;
         bills = billingService.list();
         modelAndView.addObject("bills",bills);
-        modelAndView.setViewName("billing");
+        modelAndView.setViewName("shop/billing");
         return modelAndView;
     }
 
@@ -55,7 +48,7 @@ public class ShopController {
         Payment payment = new Payment();
         modelAndView.addObject("bill",bill);
         modelAndView.addObject("payment",payment);
-        modelAndView.setViewName("card-payment");
+        modelAndView.setViewName("shop/card-payment");
         return modelAndView;
     }
 
@@ -75,7 +68,7 @@ public class ShopController {
         payment.setResponseSuccessURL("http://"+host+"/shop/card-payment/postback");
         payment.setResponseFailURL("http://"+host+"/shop/card-payment/postback");
         payment.setHashExtended(payment.getHash("sharedsecret"));
-        return "card-payment-confirm";
+        return "shop/card-payment-confirm";
     }
 
     @PostMapping(path = "/card-payment/postback")
@@ -83,6 +76,13 @@ public class ShopController {
         PaymentPostback paymentPostback = new PaymentPostback();
         paymentPostback.setStatus(paramMap.getFirst("status"));
         model.addAttribute("paymentPostBack",paymentPostback);
-        return "card-payment-postback";
+        return "shop/card-payment-postback";
+    }
+
+    @PostMapping(path = "/card-payment/webhook")
+    String cardPaymentPostback(@RequestParam MultiValueMap<String,String> paramMap)  {
+        PaymentPostback paymentPostback = new PaymentPostback();
+        paymentPostback.setStatus(paramMap.getFirst("status"));
+        return "shop/card-payment-postback";
     }
 }
