@@ -13,7 +13,7 @@
     <div class="col-lg-6 mx-auto">
         <h1 class="display-5 fw-bold">Credit card checkout</h1>
         <div>You are paying <span th:text="${bill.description}"></span> </div>
-        <form th:action="@{/shop/card-payment/__${bill.id}__}" th:method="post" th:object="${payment}">
+        <form th:action="@{/shop/fiserv/card-payment/__${bill.id}__}" th:method="post" th:object="${payment}">
             <div class="row g-3 align-items-center mb-3 ">
                 <div class="col-auto">
                     <label for="inputPassword6" class="col-form-label">Name in the card</label>

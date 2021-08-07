@@ -13,6 +13,6 @@ public class BillingServiceTests {
     @Test
     public void createBilltest() {
         Bill bill = new Bill();
-        //billingService.save(bill);
+        billingService.save(bill);
     }
 }

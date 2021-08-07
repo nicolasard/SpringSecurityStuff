@@ -16,13 +16,13 @@
     <div class="container-sm card">
       <div class="row align-items-start">
         <div class="col-auto me-auto bg-light align-middle">
-          <h2>$ <span th:text="${b.total}">$100</span></h2><h4 class="card-subtitle mb-2 text-muted"><span th:text="${b.currency}">ARS</span></h4>
+          <h2>$ <span th:text="${b.total}">$100</span></h2><h4 class="card-subtitle mb-2 text-muted"><span th:text="${b.currency}">EUR</span></h4>
         </div>
         <div class="col align-middle">
           <span th:text="${b.billNumber}">FAC-0343434</span> - <span th:text="${b.description}">Description</span>
         </div>
         <div class="col-auto me-auto justify-content-center align-self-center">
-          <a th:href="@{/shop/card-payment/__${b.id}__}"><button type="button" class="btn btn-primary">Pay</button></a>
+          <a th:href="@{/shop/fiserv/card-payment/__${b.id}__}"><button type="button" class="btn btn-primary">Pay</button></a>
         </div>
       </div>
     </div>

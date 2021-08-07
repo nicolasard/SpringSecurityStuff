@@ -1,7 +1,6 @@
 package ar.nic.springsecurity.services;
 
 import ar.nic.springsecurity.entity.Bill;
-import com.sun.org.apache.xpath.internal.operations.String;
 import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -15,10 +14,14 @@ public class BillingService {
 
     private BillingRepository billingRepository;
 
-    public void save(Bill bill) {
+    void BillingService(){
+    }
+
+    public Bill save(Bill bill) {
         Logger logger = LoggerFactory.getLogger(BillingService.class);
-        billingRepository.save(bill);
+        bill = billingRepository.save(bill);
         logger.info(new StringBuilder().append("Bill Saved ").append(bill.toString()).toString());
+        return bill;
     }
 
     public Iterable<Bill> list() {

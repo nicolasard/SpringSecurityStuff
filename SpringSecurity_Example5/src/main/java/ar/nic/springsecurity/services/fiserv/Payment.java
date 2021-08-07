@@ -1,4 +1,4 @@
-package ar.nic.springsecurity.entity;
+package ar.nic.springsecurity.services.fiserv;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -8,43 +8,46 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.util.*;
 
+/*
+ * Fiserv payment object used to request a new payment to the Connect IPG gateway
+ */
 public class Payment {
 
-    private String oid;
+    protected String oid;
 
-    private String chargetotal;
+    protected String chargetotal;
 
-    private String currency;
+    protected String currency;
 
-    private String paymentMethod;
+    protected String paymentMethod;
 
-    private String responseFailURL;
+    protected String responseFailURL;
 
-    private String responseSuccessURL;
+    protected String responseSuccessURL;
 
-    private String sharedsecret;
+    protected String sharedsecret;
 
-    private String storename;
+    protected String storename;
 
-    private String timezone;
+    protected String timezone;
 
-    private String transactionNotificationURL;
+    protected String transactionNotificationURL;
 
-    private String txndatetime;
+    protected String txndatetime;
 
-    private String txntype;
+    protected String txntype;
 
-    private String hashExtended;
+    protected String hashExtended;
 
-    private String hash_algorithm;
+    protected String hash_algorithm;
 
-    private String cardnumber;
+    protected String cardnumber;
 
-    private String expmonth;
+    protected String expmonth;
 
-    private String expyear;
+    protected String expyear;
 
-    private String cvm;
+    protected String cvm;
 
     public String getOid() {
         return oid;
@@ -142,66 +145,8 @@ public class Payment {
         this.txntype = txntype;
     }
 
-    public String getExtendedConcat() throws IllegalAccessException {
-        Map<String, String> dictionary = new HashMap<String, String>();
-        for (Field f : getClass().getDeclaredFields()) {
-            Object field = f.get(this);
-            if (field != null) {
-                if (!field.toString().isEmpty() && !f.getName().equals("sharedsecret") && !f.getName().equals("cardnumber") && !f.getName().equals("cvm") && !f.getName().equals("expyear") && !f.getName().equals("expmonth") ){
-                    dictionary.put(f.getName(), f.get(this).toString());
-                }
-            }
-        }
-
-        List<String> employeeByKey = new ArrayList<>(dictionary.keySet());
-        Collections.sort(employeeByKey);
-        StringJoiner sj = new StringJoiner("|");
-        for(String s : employeeByKey){
-            sj.add(dictionary.get(s).toString());
-        }
-        return sj.toString();
-    }
-
-    public String getHash(String sharedScret) {
-        try {
-            System.out.println(this.getExtendedConcat());
-            return calculateHMAC(this.getExtendedConcat(),sharedScret);
-        } catch (SignatureException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private static String toHexString(byte[] bytes) {
-        Formatter formatter = new Formatter();
-        for (byte b : bytes) {
-            formatter.format("%02x", b);
-        }
-        return formatter.toString();
-    }
-
-    public static String calculateHMAC(String data, String key)
-            throws SignatureException, NoSuchAlgorithmException, InvalidKeyException {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), "HmacSHA256");
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(secretKeySpec);
-        String base64HmacSha256 = Base64.getEncoder().encodeToString(mac.doFinal(data.getBytes()));
-
-        return base64HmacSha256;
-    }
-
     public String getHashExtended() {
         return hashExtended;
-    }
-
-    public void setHashExtended(String hashExtended) {
-        this.hashExtended = hashExtended;
     }
 
     public String getHash_algorithm() {
@@ -242,5 +187,9 @@ public class Payment {
 
     public void setCvm(String cvm) {
         this.cvm = cvm;
+    }
+
+    public void setHashExtended(String hashExtended) {
+        this.hashExtended = hashExtended;
     }
 }
