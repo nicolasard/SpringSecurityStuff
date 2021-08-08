@@ -27,7 +27,7 @@ public class BillingServiceTests {
         Bill bill = new Bill();
         bill.setBillNumber("00012");
         bill.setDescription("Bill description 123");
-        bill.setCurrency("EUR");
+        bill.setCurrency(Bill.Currency.EUR);
         bill.setTotal("100.3");
         bill.setExpiration(LocalDateTime.now().plusDays(3));
         bill.setCreateDate(LocalDateTime.now());

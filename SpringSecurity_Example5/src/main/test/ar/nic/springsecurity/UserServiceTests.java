@@ -1,13 +1,17 @@
 package ar.nic.springsecurity;
 
 import ar.nic.springsecurity.entity.User;
+import ar.nic.springsecurity.services.EmailSenderService;
 import ar.nic.springsecurity.services.UserService;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,8 +23,13 @@ public class UserServiceTests {
     @Autowired
     UserService userService;
 
+    @MockBean
+    EmailSenderService emailSenderService;
+
     @Test
     public void signUpUserTest() {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        Mockito.doNothing().when(emailSenderService);
         User user = new User();
         user.setName("Nicolas");
         user.setSurname("Ardison");

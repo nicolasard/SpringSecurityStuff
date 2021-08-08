@@ -1,4 +1,4 @@
-package ar.nic.springsecurity.entity;
+package ar.nic.springsecurity.services.fiserv;
 
 public class PaymentPostback {
     private String status;

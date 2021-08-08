@@ -9,6 +9,12 @@ import java.time.LocalDateTime;
 @Entity(name = "Bill")
 public class Bill {
 
+    public enum Currency {
+        EUR,
+        USD,
+        ARS
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +25,7 @@ public class Bill {
 
     String total;
 
-    String currency;
+    Currency currency;
 
     LocalDateTime expiration;
 
@@ -49,11 +55,11 @@ public class Bill {
         this.total = total;
     }
 
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 

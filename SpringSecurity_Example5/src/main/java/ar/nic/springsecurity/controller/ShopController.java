@@ -2,7 +2,7 @@ package ar.nic.springsecurity.controller;
 
 import ar.nic.springsecurity.entity.Bill;
 import ar.nic.springsecurity.services.fiserv.Payment;
-import ar.nic.springsecurity.entity.PaymentPostback;
+import ar.nic.springsecurity.services.fiserv.PaymentPostback;
 import ar.nic.springsecurity.services.BillingService;
 import ar.nic.springsecurity.services.fiserv.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class ShopController {
         Bill bill = new Bill();
         bill.setBillNumber("F000-00001");
         bill.setDescription("Energy Company - January charges");
-        bill.setCurrency("EUR");
+        bill.setCurrency(Bill.Currency.EUR);
         bill.setTotal("100.20");
         billingService.save(bill);
         Iterable<Bill> bills;
