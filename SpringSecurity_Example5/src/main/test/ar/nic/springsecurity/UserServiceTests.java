@@ -29,7 +29,7 @@ public class UserServiceTests {
     @Test
     public void signUpUserTest() {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        Mockito.doNothing().when(emailSenderService);
+        Mockito.doNothing().when(emailSenderService).sendEmail(simpleMailMessage);
         User user = new User();
         user.setName("Nicolas");
         user.setSurname("Ardison");
