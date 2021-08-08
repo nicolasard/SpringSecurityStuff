@@ -4,6 +4,7 @@ import ar.nic.springsecurity.entity.Bill;
 import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,10 +13,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BillingService {
 
+    @Autowired
     private BillingRepository billingRepository;
-
-    void BillingService(){
-    }
 
     public Bill save(Bill bill) {
         Logger logger = LoggerFactory.getLogger(BillingService.class);
