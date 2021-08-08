@@ -9,27 +9,44 @@ import java.time.LocalDateTime;
 @Entity(name = "Bill")
 public class Bill {
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public enum Currency {
         EUR,
         USD,
         ARS
     }
 
+    public enum Status {
+        UNPAYED,
+        PAYED,
+        WAITING_PAYMENT_CONFIRMATION,
+        EXPIRED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String billNumber;
+    private String billNumber;
 
-    String description;
+    private String description;
 
-    String total;
+    private String total;
 
-    Currency currency;
+    private Currency currency;
 
-    LocalDateTime expiration;
+    private Status status;
 
-    LocalDateTime createDate;
+    private LocalDateTime expiration;
+
+    private LocalDateTime createDate;
 
     public String getBillNumber() {
         return billNumber;
