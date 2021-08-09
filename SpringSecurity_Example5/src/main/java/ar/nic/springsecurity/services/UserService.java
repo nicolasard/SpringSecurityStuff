@@ -56,7 +56,6 @@ public class UserService implements UserDetailsService {
     }
 
     void sendConfirmationMail(String userMail, String token) {
-
         final SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(userMail);
         mailMessage.setSubject("Mail Confirmation Link!");
@@ -73,14 +72,9 @@ public class UserService implements UserDetailsService {
     }
 
     public void confirmUser(ConfirmationToken confirmationToken) {
-
         final User user = confirmationToken.getUser();
-
         user.setEnabled(true);
-
         userRepository.save(user);
-
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
-
     }
 }

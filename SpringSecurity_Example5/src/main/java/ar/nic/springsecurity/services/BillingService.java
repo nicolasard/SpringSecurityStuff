@@ -14,6 +14,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BillingService {
 
+    private Logger logger = LoggerFactory.getLogger(BillingService.class);
+
     @Autowired
     private BillingRepository billingRepository;
 
@@ -21,7 +23,6 @@ public class BillingService {
     private PaymentRepository paymentRepository;
 
     public Bill save(Bill bill) {
-        Logger logger = LoggerFactory.getLogger(BillingService.class);
         bill = billingRepository.save(bill);
         logger.info(new StringBuilder().append("Bill Saved ").append(bill.toString()).toString());
         return bill;
@@ -29,6 +30,7 @@ public class BillingService {
 
     public Payment savePayment(Payment payment){
         payment = paymentRepository.save(payment);
+        logger.info(new StringBuilder().append("Payment Saved ").append(payment.toString()).toString());
         return payment;
     }
 
