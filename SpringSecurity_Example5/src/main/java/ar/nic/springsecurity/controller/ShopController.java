@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -34,7 +35,10 @@ public class ShopController {
         Bill bill = new Bill();
         bill.setBillNumber("F000-00001");
         bill.setDescription("Energy Company - January charges");
-        bill.setCurrency(Bill.Currency.EUR);
+        bill.setCurrency(Bill.Currency.USD);
+        bill.setCreateDate(LocalDateTime.now());
+        bill.setExpiration(LocalDateTime.now().plusDays(10));
+        bill.setStatus(Bill.Status.UNPAYED);
         bill.setTotal("100.20");
         billingService.save(bill);
         Iterable<Bill> bills;
@@ -52,9 +56,16 @@ public class ShopController {
     @GetMapping("/fiserv/card-payment/{id}")
     ModelAndView cardPaymentGet(ModelAndView modelAndView, @PathVariable Long id) {
         Bill bill = billingService.getById(id).get();
-        Payment payment = new Payment();
+        ar.nic.springsecurity.entity.Payment payment = new ar.nic.springsecurity.entity.Payment();
+        payment.setPaymentType(ar.nic.springsecurity.entity.Payment.PaymentType.FISERV_CREDITCARD);
+        payment.setBill(bill);
+        UUID uuid = UUID.randomUUID();
+        payment.setAcquirerID(uuid.toString());
+        payment.setStatus(ar.nic.springsecurity.entity.Payment.PaymentStatus.CREATED);
+        billingService.savePayment(payment);
         modelAndView.addObject("bill",bill);
-        modelAndView.addObject("payment",payment);
+        Payment fiservCreditCardPayment = new Payment();
+        modelAndView.addObject("payment",fiservCreditCardPayment);
         modelAndView.setViewName("shop/card-payment");
         return modelAndView;
     }
@@ -62,7 +73,6 @@ public class ShopController {
     @PostMapping(path = "/fiserv/card-payment/{id}")
     String cardPaymentPost(Payment payment, @PathVariable Long id,@RequestHeader String host) throws IllegalAccessException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         Bill bill = billingService.getById(id).get();
-
         UUID uuid = UUID.randomUUID();
         DateFormat df = new SimpleDateFormat("yyyy:MM:dd-kk:mm:ss");
         payment.setChargetotal(bill.getTotal());
