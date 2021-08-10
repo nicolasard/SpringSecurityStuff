@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class BillingService {
 
     private Logger logger = LoggerFactory.getLogger(BillingService.class);
