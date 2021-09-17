@@ -1,7 +1,8 @@
 package ar.nic.springsecurity.controller;
 
 import ar.nic.springsecurity.entity.Bill;
-import ar.nic.springsecurity.services.fiserv.Payment;
+import ar.nic.springsecurity.entity.CardPayment;
+import ar.nic.springsecurity.entity.Payment;
 import ar.nic.springsecurity.services.fiserv.PaymentPostback;
 import ar.nic.springsecurity.services.BillingService;
 import ar.nic.springsecurity.services.fiserv.PaymentService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,29 +66,33 @@ public class ShopController {
         payment.setStatus(ar.nic.springsecurity.entity.Payment.PaymentStatus.CREATED);
         billingService.savePayment(payment);
         modelAndView.addObject("bill",bill);
-        Payment fiservCreditCardPayment = new Payment();
-        modelAndView.addObject("payment",fiservCreditCardPayment);
+        CardPayment cardPayment = new CardPayment();
+        modelAndView.addObject("payment",cardPayment);
         modelAndView.setViewName("shop/card-payment");
         return modelAndView;
     }
 
     @PostMapping(path = "/fiserv/card-payment/{id}")
-    String cardPaymentPost(Payment payment, @PathVariable Long id,@RequestHeader String host) throws IllegalAccessException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    String cardPaymentPost(Payment payment, @PathVariable Long id,@RequestHeader String host, BindingResult bindingResult) throws IllegalAccessException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+        if (bindingResult.hasErrors()){
+            return "shop/card-payment";
+        }
+        ar.nic.springsecurity.services.fiserv.Payment fiservPayment = new ar.nic.springsecurity.services.fiserv.Payment();
         Bill bill = billingService.getById(id).get();
         UUID uuid = UUID.randomUUID();
         DateFormat df = new SimpleDateFormat("yyyy:MM:dd-kk:mm:ss");
-        payment.setChargetotal(bill.getTotal());
-        payment.setTxntype("sale");
-        payment.setOid(uuid.toString());
-        payment.setCurrency("EUR");
-        payment.setTimezone(TimeZone.getDefault().getID());
-        payment.setTxndatetime(df.format(new Date()));
-        payment.setStorename("120995000");
-        payment.setHash_algorithm("HMACSHA256");
-        payment.setResponseSuccessURL("http://"+host+"/shop/fiserv/card-payment/postback");
-        payment.setResponseFailURL("http://"+host+"/shop/fiserv/card-payment/postback");
-        payment.setTransactionNotificationURL("http://"+host+"/shop/fiserv/card-payment/webhook");
-        payment.setHashExtended(paymentService.getHMAC256(payment));
+        fiservPayment.setChargetotal(bill.getTotal());
+        fiservPayment.setTxntype("sale");
+        fiservPayment.setOid(uuid.toString());
+        fiservPayment.setCurrency("EUR");
+        fiservPayment.setTimezone(TimeZone.getDefault().getID());
+        fiservPayment.setTxndatetime(df.format(new Date()));
+        fiservPayment.setStorename("120995000");
+        fiservPayment.setHash_algorithm("HMACSHA256");
+        fiservPayment.setResponseSuccessURL("http://"+host+"/shop/fiserv/card-payment/postback");
+        fiservPayment.setResponseFailURL("http://"+host+"/shop/fiserv/card-payment/postback");
+        fiservPayment.setTransactionNotificationURL("http://"+host+"/shop/fiserv/card-payment/webhook");
+        fiservPayment.setHashExtended(paymentService.getHMAC256(fiservPayment));
         return "shop/card-payment-confirm";
     }
 

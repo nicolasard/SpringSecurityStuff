@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 "/confirmation/**",
                                 "/shop/**",
                                 "/sign-in/**",
+                                "/backoffice/**",
                                 "/sign-up/**",
                                 "/h2-console/**").permitAll()
                 .anyRequest().authenticated()

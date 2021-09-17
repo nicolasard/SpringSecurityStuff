@@ -45,6 +45,10 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public boolean userAlreadyExists(String email){
+        return userRepository.findByEmail(email).isPresent();
+    }
+
     public void signUpUser(User user) {
         logger.info(user.toString());
         final String encryptedPassword = passwordEncoder().encode(user.getPassword());

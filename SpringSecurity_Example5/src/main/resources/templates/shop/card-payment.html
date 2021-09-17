@@ -19,7 +19,7 @@
                     <label for="name" class="col-form-label">Name in the card</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline" th:field="*{txntype}">
+                    <input type="text" id="name" class="form-control"  aria-describedby="passwordHelpInline" th:field="*{name}">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3 ">
@@ -27,7 +27,9 @@
                     <label for="cardnumber" class="col-form-label">Card Number</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="cardnumber" name="cardnumber" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{cardnumber}">
+                    <input type="text" id="cardNumber" name="cardNumber" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{cardNumber}">
+                    <div id="validationNameFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}">
+                    </div>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3 ">
@@ -35,7 +37,7 @@
                     <label for="expmonth" class="col-form-label">Exp. Month</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="expmonth" name="expmonth" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{expmonth}">
+                    <input type="text" id="expmonth" name="expmonth" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{expMonth}">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3 ">
@@ -43,7 +45,7 @@
                     <label for="expyear" class="col-form-label">Exp. Year</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="expyear" name="expyear" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{expyear}">
+                    <input type="text" id="expyear" name="expyear" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{expYear}">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3 ">
@@ -51,13 +53,9 @@
                     <label for="cvm" class="col-form-label">CVV/CVV2</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="cvm" name="cvm" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{cvm}">
+                    <input type="text" id="cvm" name="cvm" class="form-control"  aria-describedby="passwordHelpInline"  th:field="*{CVV}">
                 </div>
             </div>
-            <input type="hidden" id="oid" name="oid" th:field="*{oid}">
-            <input type="hidden" id="chargetotal" name="chargetotal" th:field="*{chargetotal}">
-            <input type="hidden" id="currency" name="currency" th:field="*{currency}">
-            <input type="hidden" id="txntpe" name="txntpe" th:field="*{txntype}">
             <input  class="btn btn-primary" type="submit" value="Pay">
         </form>
     </div>

@@ -1,6 +1,6 @@
 package ar.nic.springsecurity;
 
-import ar.nic.springsecurity.entity.Payment;
+import ar.nic.springsecurity.services.fiserv.Payment;
 import org.junit.Assert;
 import org.junit.Test;
 

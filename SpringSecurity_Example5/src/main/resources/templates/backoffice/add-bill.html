@@ -10,9 +10,31 @@
 <body>
 <div th:replace="header :: header"></div>
 <div class="px-4 py-5 my-5">
-    <h3 class="text-center">your pending bills:</h3>
+    <h3 class="text-center">Add a new bill:</h3>
     <div>
-
+        <form th:action="@{/backoffice/add-bill}" th:method="post" th:object="${bill}">
+            <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="name" class="col-form-label">Description</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="name" class="form-control" th:classappend="${#fields.hasErrors('description')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{description}">
+                    <div id="validationNameFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="name" class="col-form-label">Total</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="total" class="form-control" th:classappend="${#fields.hasErrors('total')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{total}">
+                    <div id="validationTotalFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('total')}" th:errors="*{total}">
+                    </div>
+                </div>
+            </div>
+            <input  class="btn btn-primary" type="submit" value="Add Bill">
+        </form>
     </div>
 </div>
 </body>
