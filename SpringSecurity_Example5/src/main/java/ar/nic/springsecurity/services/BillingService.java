@@ -2,6 +2,7 @@ package ar.nic.springsecurity.services;
 
 import ar.nic.springsecurity.entity.Bill;
 import ar.nic.springsecurity.entity.Payment;
+import ar.nic.springsecurity.entity.Bill.Status;
 import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -22,6 +23,14 @@ public class BillingService {
     private PaymentRepository paymentRepository;
 
     public Bill save(Bill bill) {
+        if (bill.getId()==null) {
+        	logger.info("Saving new bill...");
+        }else {
+        	logger.info("Updating bill"+bill.getId());
+        }
+        if (bill.getStatus()==null){
+        	bill.setStatus(Status.UNPAYED);
+        }
         bill = billingRepository.save(bill);
         logger.info(new StringBuilder().append("Bill Saved ").append(bill.toString()).toString());
         return bill;

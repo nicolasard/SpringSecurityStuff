@@ -17,12 +17,6 @@ public class Bill {
         this.status = status;
     }
 
-    public enum Currency {
-        EUR,
-        USD,
-        ARS
-    }
-
     public enum Status {
         UNPAYED,
         PAYED,
@@ -40,7 +34,7 @@ public class Bill {
 
     private String total;
 
-    private Currency currency;
+    private CurrencyType currency;
 
     private Status status;
 
@@ -72,11 +66,11 @@ public class Bill {
         this.total = total;
     }
 
-    public Currency getCurrency() {
+    public CurrencyType getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(CurrencyType currency) {
         this.currency = currency;
     }
 

@@ -2,6 +2,7 @@ package ar.nic.springsecurity.controller;
 
 import ar.nic.springsecurity.entity.Bill;
 import ar.nic.springsecurity.entity.CardPayment;
+import ar.nic.springsecurity.entity.CurrencyType;
 import ar.nic.springsecurity.entity.Payment;
 import ar.nic.springsecurity.services.fiserv.PaymentPostback;
 import ar.nic.springsecurity.services.BillingService;
@@ -37,7 +38,7 @@ public class ShopController {
         Bill bill = new Bill();
         bill.setBillNumber("F000-00001");
         bill.setDescription("Energy Company - January charges");
-        bill.setCurrency(Bill.Currency.USD);
+        bill.setCurrency(CurrencyType.USD);
         bill.setCreateDate(LocalDateTime.now());
         bill.setExpiration(LocalDateTime.now().plusDays(10));
         bill.setStatus(Bill.Status.UNPAYED);
