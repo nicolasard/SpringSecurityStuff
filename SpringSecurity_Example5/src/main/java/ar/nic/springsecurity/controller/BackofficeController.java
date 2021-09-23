@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,16 +27,25 @@ public class BackofficeController {
 	@Autowired
 	BillingService billingService;
 	
-    @GetMapping("add-bill")
-    ModelAndView bills(ModelAndView modelAndView, Bill bill) {
+    @GetMapping({"bill","bill/{id}"})
+    ModelAndView bills(ModelAndView modelAndView, @PathVariable(name = "id", required = false) Long id) {
+    	Bill bill = new Bill();
+    	if (id!=null) {
+    		Optional<Bill> billAtDB = billingService.getById(id);		
+        	if (billAtDB.isPresent()) {
+        		bill = billAtDB.get();
+        	}
+    	}
+    	modelAndView.addObject(bill);
         modelAndView.setViewName("backoffice/add-bill");
         return modelAndView;
     }
 
-    @PostMapping("add-bill")
+    @PostMapping("bill")
     ModelAndView bills(ModelAndView modelAndView,@Valid Bill bill, BindingResult bindingResult) {
         modelAndView.setViewName("backoffice/add-bill");
         billingService.save(bill);
         return modelAndView;
     }
+
 }

@@ -10,15 +10,17 @@
 <body>
 <div th:replace="header :: header"></div>
 <div class="px-4 py-5 my-5">
-    <h3 class="text-center">Add a new bill:</h3>
+    <h3 class="text-center" th:unless="${bill.id}">Add a new bill:</h3>
+    <h3 class="text-center" th:if="${bill.id}">Updating bill:</h3>
     <div>
-        <form th:action="@{/backoffice/add-bill}" th:method="post" th:object="${bill}">
+        <form th:action="@{/backoffice/bill}" th:method="post" th:object="${bill}">
+        	<input type="hidden" th:field="*{id}" id="id">
             <div class="row g-3 align-items-center mb-3 ">
                 <div class="col-auto">
                     <label for="name" class="col-form-label">Description</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="name" class="form-control" th:classappend="${#fields.hasErrors('description')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{description}">
+                    <input type="text" id="name" class="form-control" th:classappend="${#fields.hasErrors('description')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{description}" th:value="*{description}">
                     <div id="validationNameFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
                     </div>
                 </div>
@@ -28,7 +30,7 @@
                     <label for="name" class="col-form-label">Bill Number</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="total" class="form-control" th:classappend="${#fields.hasErrors('billNumber')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{billNumber}">
+                    <input type="text" id="total" class="form-control" th:classappend="${#fields.hasErrors('billNumber')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{billNumber}" th:value="*{billNumber}">
                     <div id="validationTotalFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('billNumber')}" th:errors="*{billNumber}">
                     </div>
                 </div>
@@ -38,7 +40,7 @@
                     <label for="name" class="col-form-label">Total</label>
                 </div>
                 <div class="col-auto has-validation">
-                    <input type="text" id="total" class="form-control" th:classappend="${#fields.hasErrors('total')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{total}">
+                    <input type="text" id="total" class="form-control" th:classappend="${#fields.hasErrors('total')} ? is-invalid" aria-describedby="passwordHelpInline" th:field="*{total}" th:value="*{total}">
                     <div id="validationTotalFeedback" class="invalid-feedback" th:if="${#fields.hasErrors('total')}" th:errors="*{total}">
                     </div>
                 </div>
@@ -53,7 +55,8 @@
                     </div>
                 </div>
             </div>
-            <input  class="btn btn-primary" type="submit" value="Add Bill">
+            <input  class="btn btn-primary" type="submit" value="Add Bill" th:unless="${bill.id}">
+            <input  class="btn btn-primary" type="submit" value="Update Bill" th:if="${bill.id}">
         </form>
     </div>
 </div>
