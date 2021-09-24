@@ -10,15 +10,30 @@
     <body>
     <div th:replace="header :: header"></div>
     <div class="px-4 py-5 my-5 text-center">
+    <h4>Log in with your credentials</h4>
     <form role="form" th:action="@{/sign-in}" th:method="post">
-            <lable>Email</lable>
-            <input type="text" id="username" name="username">
-            <lable>Password</lable>
-            <input type="password" id="password" name="password">
-            <input type="submit">
+             <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="name" class="col-form-label">Email</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="username" class="form-control" >
+                </div>
+            </div>
+             <div class="row g-3 align-items-center mb-3 ">
+                <div class="col-auto">
+                    <label for="name" class="col-form-label">Password</label>
+                </div>
+                <div class="col-auto has-validation">
+                    <input type="text" id="password" class="form-control" >
+                </div>
+            </div>
+
+            <input  class="btn btn-primary" type="submit" value="Log in" >
         </form>
+        <h4>Or</h4>
         <div>
-            <a th:href="@{/sign-up}">Create an account</a>
+            <a th:href="@{/sign-up}"><button type="button" class="btn btn-primary">Create an account</button></a>
         </div>
     </div>
     </body>
