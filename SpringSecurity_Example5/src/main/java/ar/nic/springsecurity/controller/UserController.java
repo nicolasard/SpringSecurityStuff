@@ -5,6 +5,8 @@ import ar.nic.springsecurity.entity.User;
 import ar.nic.springsecurity.services.ConfirmationTokenService;
 import ar.nic.springsecurity.services.UserService;
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -16,9 +18,9 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@AllArgsConstructor
 public class UserController {
 
+	@Autowired
     private UserService userService;
 
     private ConfirmationTokenService confirmationTokenService;

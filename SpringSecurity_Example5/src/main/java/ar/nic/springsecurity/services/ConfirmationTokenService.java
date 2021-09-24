@@ -2,6 +2,8 @@ package ar.nic.springsecurity.services;
 
 import ar.nic.springsecurity.entity.ConfirmationToken;
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,6 +12,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ConfirmationTokenService {
 
+	@Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
 
     void saveConfirmationToken(ConfirmationToken confirmationToken) {

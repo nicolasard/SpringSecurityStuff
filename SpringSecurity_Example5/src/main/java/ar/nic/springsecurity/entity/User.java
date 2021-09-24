@@ -15,22 +15,23 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 
-@Getter
-@Setter
-@Builder
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "Users")
 public class User implements UserDetails {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min=2, max=30)
-    private String name;
+    public String getName() {
+		return name;
+	}
+
+	private String name;
 
     @NotNull
     @Size(min=2, max=30)
@@ -40,7 +41,39 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public void setSurname(String surname) {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setSurname(String surname) {
         this.surname = surname;
     }
 
