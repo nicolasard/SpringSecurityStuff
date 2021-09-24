@@ -12,6 +12,7 @@
 <div class="px-4 py-5 my-5">
     <h3 class="text-center" th:unless="${bill.id}">Add a new bill:</h3>
     <h3 class="text-center" th:if="${bill.id}">Updating bill:</h3>
+    <div class="pb-lg-2 mb-2 container-sm">
     <div>
         <form th:action="@{/backoffice/bill}" th:method="post" th:object="${bill}">
         	<input type="hidden" th:field="*{id}" id="id">
@@ -58,6 +59,7 @@
             <input  class="btn btn-primary" type="submit" value="Add Bill" th:unless="${bill.id}">
             <input  class="btn btn-primary" type="submit" value="Update Bill" th:if="${bill.id}">
         </form>
+    </div>
     </div>
 </div>
 </body>

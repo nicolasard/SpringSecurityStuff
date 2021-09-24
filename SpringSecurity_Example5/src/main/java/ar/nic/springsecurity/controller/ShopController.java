@@ -35,15 +35,6 @@ public class ShopController {
 
     @GetMapping("billing")
     ModelAndView bills(ModelAndView modelAndView) {
-        Bill bill = new Bill();
-        bill.setBillNumber("F000-00001");
-        bill.setDescription("Energy Company - January charges");
-        bill.setCurrency(CurrencyType.USD);
-        bill.setCreateDate(LocalDateTime.now());
-        bill.setExpiration(LocalDateTime.now().plusDays(10));
-        bill.setStatus(Bill.Status.UNPAYED);
-        bill.setTotal("100.20");
-        billingService.save(bill);
         Iterable<Bill> bills;
         bills = billingService.list();
         modelAndView.addObject("bills",bills);
