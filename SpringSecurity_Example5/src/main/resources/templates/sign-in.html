@@ -11,6 +11,8 @@
     <div th:replace="header :: header"></div>
     <div class="px-4 py-5 my-5 text-center">
     <h4>Log in with your credentials</h4>
+
+    <div class="col-lg-6 mx-auto">
     <form role="form" th:action="@{/sign-in}" th:method="post">
              <div class="row g-3 align-items-center mb-3 ">
                 <div class="col-auto">
@@ -31,6 +33,8 @@
 
             <input  class="btn btn-primary" type="submit" value="Log in" >
         </form>
+    </div>
+    
         <h4>Or</h4>
         <div>
             <a th:href="@{/sign-up}"><button type="button" class="btn btn-primary">Create an account</button></a>
