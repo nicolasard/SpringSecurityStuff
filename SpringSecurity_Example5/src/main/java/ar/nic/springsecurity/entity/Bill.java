@@ -46,6 +46,16 @@ public class Bill {
 
     @NotNull
     private CurrencyType currency;
+    
+    public String getChangedUsername() {
+		return changedUsername;
+	}
+
+	public void setChangedUsername(String changedUsername) {
+		this.changedUsername = changedUsername;
+	}
+
+    private String changedUsername;
 
     private Status status;
 

@@ -33,7 +33,8 @@
           <h2>$ <span th:text="${b.total}">$100</span></h2><h4 class="card-subtitle mb-2 text-muted"><span th:text="${b.currency}">EUR</span></h4>
         </div>
         <div class="col align-middle">
-          <span th:text="${b.billNumber}">FAC-0343434</span> - <span th:text="${b.description}">Description</span>
+          <div><span th:text="${b.billNumber}">FAC-0343434</span> - <span th:text="${b.description}">Description</span></div>
+          <div>Edited by <span th:text="${b.changedUsername}">UserName</span></div>
         </div>
         <div class="col align-middle">
         	<span th:text="${b.status}">STATUS</span>
