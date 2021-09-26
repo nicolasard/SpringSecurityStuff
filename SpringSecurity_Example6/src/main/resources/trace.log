@@ -1,0 +1,57 @@
+== Info:   Trying 127.0.0.1...
+== Info: TCP_NODELAY set
+== Info: Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 1/3)
+== Info: schannel: disabled server certificate revocation checks
+== Info: schannel: verifyhost setting prevents Schannel from comparing the supplied target name with the subject names in server certificates.
+== Info: schannel: using IP address, SNI is not supported by OS.
+== Info: schannel: sending initial handshake data: sending 153 bytes...
+== Info: schannel: sent initial handshake data: sent 153 bytes
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: failed to receive handshake, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 4096
+== Info: schannel: encrypted data buffer: offset 4096 length 4096
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 5120 length 5120
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 6144 length 6144
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 7168 length 7168
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 8192 length 8192
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 9216 length 9216
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 10240 length 10240
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 1024
+== Info: schannel: encrypted data buffer: offset 11264 length 11264
+== Info: schannel: received incomplete message, need more data
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 204
+== Info: schannel: encrypted data buffer: offset 11468 length 12288
+== Info: schannel: a client certificate has been requested
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data buffer: offset 11468 length 12492
+== Info: schannel: sending next handshake data: sending 100 bytes...
+== Info: schannel: SSL/TLS connection with 127.0.0.1 port 8080 (step 2/3)
+== Info: schannel: encrypted data got 7
+== Info: schannel: encrypted data buffer: offset 7 length 12492
+== Info: schannel: next InitializeSecurityContext failed: SEC_E_CERT_UNKNOWN (0x80090327) - An unknown error occurred while processing the certificate.
+== Info: Closing connection 0
+== Info: schannel: shutting down SSL/TLS connection with 127.0.0.1 port 8080
+== Info: schannel: clear security context handle

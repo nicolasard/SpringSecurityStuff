@@ -1,0 +1,1 @@
+curl -v --cert ./client.cer -k  --key ./client.key --pass 123456 --url https://127.0.0.1:8080/hello --trace-ascii "trace.log" 
