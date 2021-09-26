@@ -32,5 +32,11 @@ This is example was taken from https://github.com/kamer/spring-boot-user-registr
 This is a continuation of example 3. It validates the new user email by sending a email
 with a token that the user should provide. 
 
+#### Example 5
+This is a continuation of example 4. But really here I'm doing a full application. This should have it own repo.
+
+#### Example 6
+Here we are not really using springSecurity but we are doing MTLS with at WS.
+
 #### Compiling
 To compile all the project at once you have the root pom.xml
