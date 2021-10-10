@@ -1,6 +1,5 @@
 package ar.nic;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -11,7 +10,7 @@ import org.bouncycastle.operator.OperatorCreationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ar.nic.crypto.KeyStoreController;
+import ar.nic.crypto.KeyStoreService;
 
 @SpringBootTest
 class SpringSecurityExample6ApplicationTests {
@@ -22,10 +21,9 @@ class SpringSecurityExample6ApplicationTests {
 	
 	@Test
 	void createServerJKS() throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException, OperatorCreationException {
-		KeyStoreController ksController = new KeyStoreController();
-		KeyStore ks = ksController.openKS();
-		ksController.generateAsymetricCredentials(ks, "test");
-		ksController.saveKS(ks);
+		KeyStoreService ksController = new KeyStoreService();
+		KeyStore ks = ksController.openKS("password");
+		ksController.generateAsymetricCredentials(ks, "server");
+		ksController.saveKS(ks,"password");
 	}
-
 }

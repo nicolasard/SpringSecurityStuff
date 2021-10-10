@@ -1,26 +1,18 @@
 package ar.nic.crypto;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigInteger;
-import java.security.GeneralSecurityException;
 import java.security.Key;
-import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.time.Duration;
 import java.time.Instant;
@@ -46,18 +38,18 @@ import org.bouncycastle.operator.bc.BcDigestCalculatorProvider;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.operator.ContentSigner;
 
-public class KeyStoreController {
+public class KeyStoreService {
 
-	public KeyStore openKS() throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException {
+	public KeyStore openKS(String Password) throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException {
 		KeyStore ks = KeyStore.getInstance("jks");
-		char[] pwdArray = "password".toCharArray();
+		char[] pwdArray = Password.toCharArray();
 		ks.load(null, pwdArray);
 		return ks;
 	}
 
-	public void saveKS(KeyStore ks) throws FileNotFoundException, IOException, KeyStoreException,
+	public void saveKS(KeyStore ks, String password) throws FileNotFoundException, IOException, KeyStoreException,
 			NoSuchAlgorithmException, CertificateException {
-		char[] pwdArray = "password".toCharArray();
+		char[] pwdArray = password.toCharArray();
 		try (FileOutputStream fos = new FileOutputStream("newKeyStoreFileName.jks")) {
 			ks.store(fos, pwdArray);
 		}
