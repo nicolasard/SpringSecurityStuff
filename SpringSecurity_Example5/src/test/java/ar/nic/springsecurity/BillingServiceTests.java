@@ -1,6 +1,7 @@
 package ar.nic.springsecurity;
 
 import ar.nic.springsecurity.entity.Bill;
+import ar.nic.springsecurity.entity.CurrencyType;
 import ar.nic.springsecurity.entity.Payment;
 import ar.nic.springsecurity.services.BillingService;
 import org.junit.Assert;
@@ -28,7 +29,7 @@ public class BillingServiceTests {
         Bill bill = new Bill();
         bill.setBillNumber("00012");
         bill.setDescription("Bill description 123");
-        bill.setCurrency(Bill.Currency.EUR);
+        bill.setCurrency(CurrencyType.EUR);
         bill.setStatus(Bill.Status.UNPAYED);
         bill.setTotal("100.3");
         bill.setExpiration(LocalDateTime.now().plusDays(3));
