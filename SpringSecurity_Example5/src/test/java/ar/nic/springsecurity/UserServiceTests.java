@@ -64,8 +64,7 @@ public class UserServiceTests {
         user.setSurname("Ardison");
         user.setEmail("user@email.com");
         user.setPassword("12345");
-        userService.signUpUser(user);
-        
+        userService.signUpUser(user);        
     }
 
     /*
@@ -82,7 +81,46 @@ public class UserServiceTests {
         user.setPassword("12345");
         BindingResult bindingResult = createBindingResult(user);
         userService.signUpUserValidation(user,bindingResult);
-        assertEquals(0, bindingResult.getErrorCount());
-        
+        assertEquals(0, bindingResult.getErrorCount());        
     }
+    
+    /*
+     * Validates that we have exceptions when the client doesn't complete the form
+     */
+    @Test
+    public void signUpUserValidationsFailsTest() {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        Mockito.doNothing().when(emailSenderService).sendEmail(simpleMailMessage);
+        final User user = new User();
+        user.setName("");
+        user.setSurname("");
+        user.setEmail("");
+        user.setPassword("");
+        BindingResult bindingResult = createBindingResult(user);
+        userService.signUpUserValidation(user,bindingResult);
+        assertEquals(4, bindingResult.getErrorCount());
+        assertEquals("size must be between 2 and 30",bindingResult.getFieldError("name").getDefaultMessage());
+        assertEquals("size must be between 2 and 30",bindingResult.getFieldError("surname").getDefaultMessage());
+        assertEquals("must not be blank",bindingResult.getFieldError("email").getDefaultMessage());
+        assertEquals("size must be between 5 and 100",bindingResult.getFieldError("password").getDefaultMessage());   
+    }
+
+    /*
+     * Validates that we have exceptions when the client doesn't complete the form
+     */
+    @Test
+    public void signUpUserValidateWrongEmailTest() {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        Mockito.doNothing().when(emailSenderService).sendEmail(simpleMailMessage);
+        final User user = new User();
+        user.setName("Nicolas");
+        user.setSurname("Ardison");
+        user.setEmail("email");
+        user.setPassword("123456");
+        BindingResult bindingResult = createBindingResult(user);
+        userService.signUpUserValidation(user,bindingResult);
+        assertEquals(1, bindingResult.getErrorCount());
+        assertEquals("must be a well-formed email address",bindingResult.getFieldError("email").getDefaultMessage());
+    }
+    
 }
