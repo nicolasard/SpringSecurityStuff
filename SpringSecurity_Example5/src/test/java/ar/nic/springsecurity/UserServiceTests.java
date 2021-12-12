@@ -77,8 +77,8 @@ public class UserServiceTests {
         User user = new User();
         user.setName("Nicolas");
         user.setSurname("Ardison");
-        user.setEmail("user@email.com");
-        user.setPassword("12345");
+        user.setEmail("user2@email.com");
+        user.setPassword("Password!@#");
         BindingResult bindingResult = createBindingResult(user);
         userService.signUpUserValidation(user,bindingResult);
         assertEquals(0, bindingResult.getErrorCount());        
