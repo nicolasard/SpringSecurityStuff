@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import java.text.MessageFormat;
 import java.util.Optional;
@@ -80,5 +82,18 @@ public class UserService implements UserDetailsService {
         user.setEnabled(true);
         userRepository.save(user);
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+    }
+    
+    public String signUpUserValidation(User user, BindingResult bindingResult) {
+        boolean hasErrors = false;
+        if (userAlreadyExists(user.getEmail())) {
+            bindingResult.addError(new FieldError("user", "email", "Email already exists"));
+            hasErrors = true;
+        }
+        if (bindingResult.hasErrors() || hasErrors) {
+            return "sign-up";
+        }
+        signUpUser(user);
+        return "redirect:/confirmation";
     }
 }
