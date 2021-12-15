@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
@@ -21,6 +22,7 @@ import org.springframework.validation.DataBinder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.support.BindingAwareModelMap;
 
+@Category(UnitTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 //This makes Spring to resolve the bean injection. https://www.youtube.com/watch?v=Ekr4jxOIf4c a good video about Junit tests
